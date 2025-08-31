@@ -63,3 +63,29 @@ test.describe("E2Eテスト", () => {
     });
   });
 });
+
+test.describe("ビジュアルリグレッションテスト", () => {
+  test("TOPページ", async ({ page }) => {
+    await page.goto("/");
+    await expect(page.getByRole("heading")).toHaveText("Todoアプリ");
+    await expect(page).toHaveScreenshot("top-page.png", {
+      mask: [page.locator("text=ページを開いた時刻")],
+    });
+  });
+
+  test("Aboutページ", async ({ page }) => {
+    await page.goto("/");
+
+    // ナビゲーションバーのAboutリンクをクリック
+    await page.getByRole("link", { name: "About" }).click();
+
+    // Aboutページに遷移していることを確認
+    await expect(page).toHaveURL(/\/about\/?/);
+    await expect(page.getByRole("heading")).toHaveText("about");
+
+    // Aboutページのスクリーンショット
+    await expect(page).toHaveScreenshot("about-page.png", {
+      mask: [page.locator("text=ページを開いた時刻")],
+    });
+  });
+});
