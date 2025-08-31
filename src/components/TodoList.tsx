@@ -10,10 +10,15 @@ const liStyle = {
   borderBottom: "1px solid #eee",
 };
 
+/** TodoList に渡す props */
 type TodoListProps = {
+  /** 表示するTodoのリスト */
   todos: TodoType[];
 };
 
+/**
+ * Todoの一覧を表示するコンポーネント
+ */
 const TodoList: React.FC<TodoListProps> = ({ todos }) => {
   return (
     <ul style={ulStyle}>
