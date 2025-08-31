@@ -17,7 +17,7 @@ type TodoListProps = {
 const TodoList: React.FC<TodoListProps> = ({ todos }) => {
   return (
     <ul style={ulStyle}>
-      {todos.map((todo, index) => (
+      {todos.map((todo) => (
         <li style={liStyle} key={todo.id}>
           {todo.title} [{todo.status}]
         </li>
