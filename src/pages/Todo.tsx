@@ -4,9 +4,9 @@ import type { TodoType } from "../types/todo";
 
 const Todo = () => {
   const apiEndpoint = "http://localhost:3000/todo";
-
   const [input, setInput] = useState("");
   const [todos, setTodos] = useState<TodoType[]>([]);
+  const [error, setError] = useState("");
 
   const handleAddTodo = () => {
     const newTodo: TodoType = {
@@ -31,12 +31,16 @@ const Todo = () => {
     fetch(apiEndpoint)
       .then((res) => res.json())
       .then((data) => setTodos(data))
-      .catch((error) => console.error("Error fetching todos:", error));
+      .catch((error) => {
+        console.error("Error fetching todos:", error);
+        setError("データの取得に失敗しました");
+      });
   }, []);
 
   return (
     <>
       <h1>Todoアプリ</h1>
+      {error && <div>{error}</div>}
       <input value={input} onChange={(e) => setInput(e.target.value)} />
       <button onClick={handleAddTodo}>追加</button>
       <TodoList todos={todos} />
