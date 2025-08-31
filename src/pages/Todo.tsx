@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import TodoList from "../components/TodoList.jsx";
 import type { TodoType } from "../types/todo";
+import H1 from "../components/common/H1";
 
 const Todo = () => {
   const apiEndpoint = "http://localhost:3000/todo";
@@ -36,7 +37,7 @@ const Todo = () => {
 
   return (
     <>
-      <h1>Todoアプリ</h1>
+      <H1>Todoアプリ</H1>
       <input value={input} onChange={(e) => setInput(e.target.value)} />
       <button onClick={handleAddTodo}>追加</button>
       <TodoList todos={todos} />
